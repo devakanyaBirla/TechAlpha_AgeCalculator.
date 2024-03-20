@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <head name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            #Box {
+                align-items: center;
+                justify-content: center;
+            }
+
+            body {
+                font-family: sans-serif;
+                background-color: #f7f7;
+                padding: 0;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            .calculator {
+                background-color: aqua;
+                padding: 30px;
+                border-radius: 15px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            }
+
+            h1 {
+                color: #333;
+                margin-bottom: 50px;
+            }
+
+            label {
+                font-weight: 500;
+                margin-right: 1px;
+            }
+            button{
+                
+                margin-top: 10px;
+                margin-left: 80px; 
+                background-color:gray;
+                border-style: none;
+                padding: 7px;
+
+            }
+        </style>
+    </head>
+
+<body>
+    <script>
+        function calculate_Age() {
+            var Birth_Date = document.getElementById("Birth_Date").value;
+
+            if (Birth_Date === '') {
+                document.getElementById("error").innerHTML = "Please Enter Your Date Of Birth.";
+                document.getElementById("result").innerHTML = "";
+                return;
+            }
+
+            var Birth_DateParts = Birth_Date.split('-');
+            var year = parseInt(Birth_DateParts[0]);
+            var month = parseInt(Birth_DateParts[1]);
+            var day = parseInt(Birth_DateParts[2]);
+
+            var today = new Date();
+            var current_year = today.getFullYear();
+            var current_Month = today.getMonth() + 1;     //Adding 1 because getMonth return zero-based index
+            var current_Day = today.getDay();
+
+
+            var age = current_year - year;
+            if (current_Month < month || (current_Month === month && current_Day < day)) {
+                age--;
+            }
+
+            if (age < 0) {
+                document.getElementById("error").innerHTML = "Invalid Date Of Birth. <br> Please Enter A Valid Date Of Birth.";
+                document.getElementById("result").innerHTML = "";
+            }
+            else {
+                document.getElementById("error").innerHTML = "";
+                document.getElementById("result").innerHTML = "Your Age Is:" + age;
+            }
+
+        } 
+    </script>
+    <div class="calculator" id="Box">
+        <h1><u>~~~CALCULATOR~~~</u></h1>
+        <label>Enter Your Date Of Birth :</label>
+        <input type="date" id="Birth_Date">
+        <u>
+            <br>
+            <button onclick="calculate_Age()">Calculate_Age</button>
+            <p id="result"></p>
+            <p id="error" class="error"></p>
+        </u>
+</body>
+
+</html>
